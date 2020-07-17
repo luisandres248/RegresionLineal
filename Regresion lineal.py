@@ -7,6 +7,7 @@ from sklearn.model_selection import KFold
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import seaborn as seabornInstance
+from sklearn.metrics import mean_squared_error
 
 datafile = 'datosRL.xls'
 
@@ -40,6 +41,21 @@ model.fit(x,y)
 
 r_sq = model.score(x,y)
 print('coefficient of determination:', r_sq)
+
+print('beta = ' + str(model.coef_) + ', alpha = ' + str(model.intercept_))
+
+# Predecimos los valores y para los datos usados en el entrenamiento
+prediccion_entrenamiento = model.predict(x)
+
+# Calculamos el Error Cuadrático Medio (MSE = Mean Squared Error)
+mse = mean_squared_error(y_true = y, y_pred = prediccion_entrenamiento)
+
+# La raíz cuadrada del MSE es el RMSE
+rmse = np.sqrt(mse)
+
+print('Error Cuadrático Medio (MSE) = ' + str(mse))
+print('Raíz del Error Cuadrático Medio (RMSE) = ' + str(rmse))
+
 
 Y_pred = model.predict(x)
 
