@@ -75,7 +75,7 @@ def plot_model(x,y):
 plot_model(x,y)
 
 #Calculo de consumo dado renta
-rentax=0.48
+rentax=480
 consumoy=model.predict(np.array(rentax).reshape(-1,1))
 print('consumo calculado con el modelo dado una renta de ' + str(rentax) + ' = ' + str(float(consumoy)))
 
@@ -85,6 +85,6 @@ print(renta_list)
 print(consumo_list)
 
 #ploteo de dispersion con dato nuevo y modelo de regresion
-plt.xlim(-10 , 600)
-plt.ylim(0 , 450)
+plt.xlim( 350, 600)
+plt.ylim(250 , 450)
 plot_model(np.array(renta_list).reshape((-1,1)),consumo_list)
