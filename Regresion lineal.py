@@ -22,12 +22,6 @@ data2.drop(['Año'],inplace=True)
 print(data2)
 print(data2.describe())
 
-#ploteo de los datos en diagrama de puntos
-data2.plot(x='Renta Neta', y='consumo', style='o')
-plt.title('Consumo vs Renta')
-plt.xlabel('Renta Neta')
-plt.ylabel('Consumo')
-
 #datos del dataframe a 2 listas
 consumo_list = data2['consumo'].to_list()
 renta_list= data2['Renta Neta'].to_list()
@@ -37,6 +31,14 @@ x = np.array(renta_list).reshape((-1,1))
 y = consumo_list
 model = LinearRegression()
 model.fit(x,y)
+
+#Ploteando Diagrama de dispersion
+plt.scatter(x, y)
+plt.title('Diagrama de dispersión')
+plt.xlabel('Renta Neta')
+plt.ylabel('Consumo')
+plt.show()
+
 
 #coeficiente de determinacion y coeficientes de recta
 r_sq = model.score(x,y)
@@ -61,11 +63,28 @@ rmse = np.sqrt(mse)
 print('Error Cuadrático Medio (MSE) = ' + str(mse))
 print('Raíz del Error Cuadrático Medio (RMSE) = ' + str(rmse))
 
+#ploteo de regresion lineal
+def plot_model(x,y):
+    Y_pred = model.predict(x)
+    plt.scatter(x, y)
+    plt.plot(x, Y_pred, color='red')
+    plt.title('Diagrama de dispersión Con Modelo de Regresión')
+    plt.xlabel('Renta Neta')
+    plt.ylabel('Consumo')
+    plt.show()
+plot_model(x,y)
 
-Y_pred = model.predict(x)
+#Calculo de consumo dado renta
+rentax=0.48
+consumoy=model.predict(np.array(rentax).reshape(-1,1))
+print('consumo calculado con el modelo dado una renta de ' + str(rentax) + ' = ' + str(float(consumoy)))
 
-plt.scatter(x, y)
-plt.plot(x, Y_pred, color='red')
+renta_list.append(rentax)
+consumo_list.append(int(consumoy))
+print(renta_list)
+print(consumo_list)
 
-
-plt.show()
+#ploteo de dispersion con dato nuevo y modelo de regresion
+plt.xlim(-10 , 600)
+plt.ylim(0 , 450)
+plot_model(np.array(renta_list).reshape((-1,1)),consumo_list)
