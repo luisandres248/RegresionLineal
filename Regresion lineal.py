@@ -85,6 +85,6 @@ print(renta_list)
 print(consumo_list)
 
 #ploteo de dispersion con dato nuevo y modelo de regresion
-plt.xlim( 350, 600)
-plt.ylim(250 , 450)
+plt.xlim( 365, 600)
+plt.ylim(250 , 410)
 plot_model(np.array(renta_list).reshape((-1,1)),consumo_list)
