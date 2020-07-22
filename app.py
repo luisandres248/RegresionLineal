@@ -1,10 +1,9 @@
 import dash
-import plotly.graph_objects as go
 import dash_html_components as html
 import dash_core_components as dcc
 import pandas as pd
 import plotly.express as px
-from sklearn.linear_model import LinearRegression
+
 
 
 # archivo de datos
@@ -23,6 +22,8 @@ print(data2.describe())
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+server = app.server
 
 app.layout = html.Div([html.H1('Regresion Lineal TP Final Luis Marquez', style={'color': 'grey',
                                                                                 'text-align': 'center'
